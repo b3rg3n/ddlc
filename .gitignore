@@ -1,0 +1,10 @@
+# Useless files
+game/cache/
+game/saves/
+game/tl/
+*.rpyc
+*.rpyb
+*.rpym
+*.rpymc
+*.txt
+*.save
