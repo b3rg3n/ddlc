@@ -334,7 +334,7 @@ image mcredits_1_test:
     Text("What will it take just to find that special day?", style="monika_credits_text") with ImageDissolve("images/menu/wipeleft.webp", 15.0, ramplen=4)
 
 image end_glitch1:
-    "bg/end-glitch1.jpg"
+    "bg/end-glitch1.webp"
     alpha 0.0
     time 1.0
     alpha 1.0
@@ -350,14 +350,14 @@ image end_glitch1:
     "end_glitch4"
 
 image end_glitch2:
-    "bg/end-glitch2.jpg"
+    "bg/end-glitch2.webp"
     block:
         yoffset 1280 ytile 2
         linear 4 yoffset 0
         repeat
 
 image end_glitch3:
-    "bg/end-glitch3.jpg"
+    "bg/end-glitch3.webp"
     block:
         yoffset 1280 ytile 2
         linear 4 yoffset 0
@@ -365,9 +365,9 @@ image end_glitch3:
 
 image end_glitch4:
     parallel:
-        "bg/end-glitch4.jpg"
+        "bg/end-glitch4.webp"
         1.25
-        "bg/end-glitch3.jpg"
+        "bg/end-glitch3.webp"
         0.1
         repeat
     parallel:

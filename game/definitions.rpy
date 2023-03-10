@@ -142,7 +142,7 @@ image bg kitchen = "bg/kitchen.webp"
 image bg notebook = "bg/notebook.webp"
 image bg notebook-glitch = "bg/notebook-glitch.webp"
 
-image bg glitch = LiveTile("bg/glitch.jpg")
+image bg glitch = LiveTile("bg/glitch.webp")
 
 image glitch_color:
     ytile 3

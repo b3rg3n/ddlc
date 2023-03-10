@@ -3,7 +3,7 @@ label ch21_y_end:
 
 label ch22_y_end:
     stop music fadeout 2.0
-    call showpoem (poem_y22, music=False, paper="images/bg/poem_y1.jpg", img="yuri 2s") from _call_showpoem_14
+    call showpoem (poem_y22, music=False, paper="images/bg/poem_y1.webp", img="yuri 2s") from _call_showpoem_14
     y 2q "Ха-ха-ха..."
     y "В смысл можешь не вникать."
     y "Мысли в последнее время сменяются слишком часто, так что пришлось воспользоваться твоей ручкой."
@@ -24,7 +24,7 @@ label ch23_y_end:
     show darkred zorder 5:
         alpha 0
         linear 2.0 alpha 1.0
-    call showpoem (poem_y23, track="bgm/5_yuri2.ogg", revert_music=False, paper="images/bg/poem_y2.jpg", img="yuri eyes", where=truecenter) from _call_showpoem_15
+    call showpoem (poem_y23, track="bgm/5_yuri2.ogg", revert_music=False, paper="images/bg/poem_y2.webp", img="yuri eyes", where=truecenter) from _call_showpoem_15
     y "Тебе нравится???"
     y "Я написала его для тебя!"
     $ gtext = glitchtext(80)
