@@ -1,0 +1,35 @@
+Wed May 24 20:28:37 2023
+Windows-10-10.0.18362
+Ren'Py 8.1.0.23051307
+ 
+
+Bootstrap to the start of init.init. took 0.14s
+Early init. took 0.00s
+Loader init. took 0.12s
+Loading error handling. took 0.37s
+Loading script. took 19.43s
+Loading save slot metadata. took 0.07s
+Loading persistent. took 0.00s
+Running init code. took 0.35s
+Loading analysis data. took 0.00s
+Analyze and compile ATL. took 0.55s
+Reloading save slot metadata. took 0.04s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Admin\\AppData\\Roaming/RenPy/backups\\ddlc':
+Dump and make backups. took 0.21s
+Cleaning cache. took 0.00s
+Making clean stores. took 0.00s
+Initial gc. took 0.18s
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: b"Couldn't load nvlib." (can be ignored)
+Creating interface object. took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.20s
+Build styles took 0.01s
+Load screen analysis took 0.00s
+Analyze screens took 0.08s
+Save screen analysis took 0.04s
+Prepare screens took 0.38s
+Save pyanalysis. took 0.10s
+Save bytecode. took 0.22s

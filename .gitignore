@@ -6,5 +6,4 @@ game/tl/
 *.rpyb
 *.rpym
 *.rpymc
-*.txt
 *.save

@@ -589,7 +589,7 @@ label credits2:
     show credits_header "Особая благодарность\n за помощь в переводе\n\n\n" as credits_header_1 at credits_text_scroll_left
     show credits_text "Aesthetic Dialectic\nRiaria" as credits_text_1 at credits_text_scroll_left
     show credits_header "Благодарность\n за порт на Android\n\n\n" as credits_header_1 at credits_text_scroll_left
-    show credits_text "CuteRabbot (ex. Otorhin)" as credits_text_1 at credits_text_scroll_left
+    show credits_text "CuteRabbot (ex. Otorhin)\nBERGEN" as credits_text_1 at credits_text_scroll_left
     $ lockedtext = "" if persistent.clear[imagenum] else "_locked"
     $ if persistent.clearall: lockedtext = "_clearall"
     $ pause(95.00 - (datetime.datetime.now() - starttime).total_seconds())

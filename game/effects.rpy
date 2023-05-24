@@ -1,6 +1,11 @@
+
 init python:
+
     def screenshot_srf():
-        srf = renpy.display.draw.screenshot(None, False)
+        if renpy.version_tuple > (7, 3, 5, 606):
+            srf = renpy.display.draw.screenshot(None)
+        else:
+            srf = renpy.display.draw.screenshot(None, False)
         
         return srf
 
@@ -29,7 +34,6 @@ init python:
         global _windows_hidden
         _windows_hidden = not enabled
 
-
 screen invert(length, delay=0.0):
     add Invert(delay) size (1280, 720)
     timer delay action PauseAudio("music")
@@ -42,6 +46,7 @@ screen invert(length, delay=0.0):
 
 
 init python:
+    import random
     class TearPiece:
         def __init__(self, startY, endY, offtimeMult, ontimeMult, offsetMin, offsetMax):
             self.startY = startY
@@ -59,10 +64,12 @@ init python:
             elif st <= self.offTime and self.offset != 0:
                 self.offset = 0
 
+
     class Tear(renpy.Displayable):
         def __init__(self, number, offtimeMult, ontimeMult, offsetMin, offsetMax, srf=None):
             super(Tear, self).__init__()
             self.width, self.height = renpy.get_physical_size()
+            
             if float(self.width) / float(self.height) > 16.0/9.0:
                 self.width = self.height * 16 / 9
             else:
@@ -70,6 +77,7 @@ init python:
             self.number = number
             if not srf: self.srf = screenshot_srf()
             else: self.srf = srf
+            
             self.pieces = []
             tearpoints = [0, self.height]
             for i in range(number):
@@ -247,7 +255,8 @@ init python:
 
 
 init python:
-    import math
+    ## AnimatedMask
+    # This class declares the code used for the AnimatedMask effect in Act 3.
     class AnimatedMask(renpy.Displayable):
         
         def __init__(self, child, mask, maskb, oc, op, moving=True, speed=1.0, frequency=1.0, amount=0.5, **properties):
@@ -293,12 +302,36 @@ init python:
             
             nr = renpy.render(self.null, width, height, st, at)
             
-            rv = renpy.Render(w, h, opaque=False)
+            rv = renpy.Render(w, h)
             
+            complete = self.oc + math.pow(math.sin(st * self.speed / 8), 64 * self.frequency) * self.amount
+
             rv.operation = renpy.display.render.IMAGEDISSOLVE
             rv.operation_alpha = 1.0
-            rv.operation_complete = self.oc + math.pow(math.sin(st * self.speed / 8), 64 * self.frequency) * self.amount
+            rv.operation_complete = complete
             rv.operation_parameter = self.op
+            
+            if renpy.display.render.models:
+
+                target = rv.get_size()
+
+                op = self.op
+
+                # Prevent a DBZ if the user gives us a 0 ramp.
+                if op < 1:
+                    op = 1
+
+                # Compute the offset to apply to the alpha.
+                start = -1.0
+                end = op / 256.0
+                offset = start + (end - start) * complete
+
+                rv.mesh = True
+
+                rv.add_shader("renpy.imagedissolve",)
+                rv.add_uniform("u_renpy_dissolve_offset", offset)
+                rv.add_uniform("u_renpy_dissolve_multiplier", 256.0 / op)
+                rv.add_property("mipmap", renpy.config.mipmap_dissolves if (self.style.mipmap is None) else self.style.mipmap)
             
             rv.blit(mb, (0, 0), focus=False, main=False)
             rv.blit(nr, (0, 0), focus=False, main=False)
@@ -307,9 +340,12 @@ init python:
             renpy.redraw(self, 0)
             return rv
 
+    # This function makes a image be transparent for a bit then 
+    # fade in and out in Act 3.
     def monika_alpha(trans, st, at):
         trans.alpha = math.pow(math.sin(st / 8), 64) * 1.4
         return 0
+
 
 image blood_particle_drip:
     "gui/blood_drop.webp"

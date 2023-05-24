@@ -2,7 +2,7 @@
 define config.variants = ["phone", "tablet", "touch", "ios", None]
 
 define config.gestures = { "n" : "game_menu",
-                           "w" : "help",
+                           "w" : "history",
                            "e" : "toggle_skip",
                            "s" : "hide_windows"}
 init -1700 python:
