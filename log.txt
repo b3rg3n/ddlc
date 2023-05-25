@@ -1,35 +1,43 @@
-Wed May 24 20:28:37 2023
+Thu May 25 11:50:02 2023
 Windows-10-10.0.18362
-Ren'Py 8.1.0.23051307
+Ren'Py 7.6.0.23051307
  
 
-Bootstrap to the start of init.init. took 0.14s
-Early init. took 0.00s
-Loader init. took 0.12s
-Loading error handling. took 0.37s
-Loading script. took 19.43s
-Loading save slot metadata. took 0.07s
+Bootstrap to the start of init.init. took 0.16s
+Early init. took 0.01s
+Loader init. took 0.07s
+Loading error handling. took 0.22s
+game/script-poemgame.rpy:285: SyntaxWarning: name 'sayoriTime' is used prior to global declaration
+  global sayoriTime
+game/script-poemgame.rpy:292: SyntaxWarning: name 'natsukiTime' is used prior to global declaration
+  global natsukiTime
+game/script-poemgame.rpy:299: SyntaxWarning: name 'yuriTime' is used prior to global declaration
+  global yuriTime
+game/script-poemgame.rpy:306: SyntaxWarning: name 'monikaTime' is used prior to global declaration
+  global monikaTime
+Loading script. took 20.57s
+Loading save slot metadata. took 0.10s
 Loading persistent. took 0.00s
 Running init code. took 0.35s
 Loading analysis data. took 0.00s
-Analyze and compile ATL. took 0.55s
-Reloading save slot metadata. took 0.04s
+Analyze and compile ATL. took 0.54s
+Reloading save slot metadata. took 0.05s
 Index archives took 0.00s
 Backing up script files to 'C:\\Users\\Admin\\AppData\\Roaming/RenPy/backups\\ddlc':
-Dump and make backups. took 0.21s
+Dump and make backups. took 0.28s
 Cleaning cache. took 0.00s
 Making clean stores. took 0.00s
-Initial gc. took 0.18s
+Initial gc. took 0.21s
 DPI scale factor: 1.250000
 nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: b"Couldn't load nvlib." (can be ignored)
+nvdrs: "Couldn't load nvlib." (can be ignored)
 Creating interface object. took 0.00s
 Cleaning stores took 0.00s
-Init translation took 0.20s
+Init translation took 0.24s
 Build styles took 0.01s
 Load screen analysis took 0.00s
-Analyze screens took 0.08s
-Save screen analysis took 0.04s
-Prepare screens took 0.38s
-Save pyanalysis. took 0.10s
-Save bytecode. took 0.22s
+Analyze screens took 0.09s
+Save screen analysis took 0.08s
+Prepare screens took 0.44s
+Save pyanalysis. took 0.21s
+Save bytecode. took 0.21s
