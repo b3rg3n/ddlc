@@ -449,6 +449,7 @@ screen navigation():
                     textbutton _("ŔŗñĮ¼»ŧþŀÂŻŕěōì«") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Пожалуйста, введите своё имя", ok_action=Function(FinishEnterName)))
                 else:
                     textbutton _("Новая игра") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Пожалуйста, введите своё имя", ok_action=Function(FinishEnterName)))
+                    textbutton _("Моды") action ShowMenu("modsloader")
 
             else:
 

@@ -1,0 +1,10 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/screens.rpy", line 455: u'else' is not a keyword argument or valid child of the vbox statement.
+    else:
+        ^
+
+Ren'Py Version: Ren'Py 7.6.3.23091805
+Sat Nov 25 22:26:53 2023
