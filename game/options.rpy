@@ -214,6 +214,7 @@ init python:
     build.archive("fonts", "all")
 
     build.classify("game/**.jpg", "images")
+    build.classify("game/**.png", "images")
     build.classify("game/**.webp", "images")
 
     build.classify("game/**.rpyc", "scripts")

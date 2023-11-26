@@ -1,64 +1,27 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While loading <renpy.display.im.Image object (u'gui/overlay/main_menu.png') at 0x0000000009bcce90>:
-IOError: Couldn't find file 'gui/overlay/main_menu.png'.
+While running game code:
+  File "game/splash.rpy", line 1, in script
+    init -100 python:
+  File "game/splash.rpy", line 4, in <module>
+    if not os.path.exists(os.environ['ANDROID_PUBLIC'] + "/characters/"):
+KeyError: u'ANDROID_PUBLIC'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
-    python hide:
+  File "game/splash.rpy", line 1, in script
+    init -100 python:
   File "renpy/ast.py", line 1138, in execute
     renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
   File "renpy/python.py", line 1122, in py_exec_bytecode
     exec(bytecode, globals, locals)
-  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
-    python hide:
-  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
-    ui.interact()
-  File "renpy/ui.py", line 299, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "renpy/display/core.py", line 3582, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
-  File "renpy/display/core.py", line 4175, in interact_core
-    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
-  File "renpy/display/core.py", line 2785, in draw_screen
-    renpy.config.screen_height,
-  File "render.pyx", line 492, in renpy.display.render.render_screen
-  File "render.pyx", line 266, in renpy.display.render.render
-  File "renpy/display/layout.py", line 888, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 266, in renpy.display.render.render
-  File "renpy/display/layout.py", line 888, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 266, in renpy.display.render.render
-  File "renpy/display/layout.py", line 888, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 266, in renpy.display.render.render
-  File "renpy/display/screen.py", line 731, in render
-    child = renpy.display.render.render(self.child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 266, in renpy.display.render.render
-  File "renpy/display/layout.py", line 888, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 266, in renpy.display.render.render
-  File "renpy/display/layout.py", line 1373, in render
-    back = render(style.background, bw, bh, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 266, in renpy.display.render.render
-  File "renpy/display/im.py", line 676, in render
-    return cache.get(self, render=True)
-  File "renpy/display/im.py", line 330, in get
-    surf = image.load()
-  File "renpy/display/im.py", line 803, in load
-    raise e
-IOError: Couldn't find file 'gui/overlay/main_menu.png'.
+  File "game/splash.rpy", line 4, in <module>
+    if not os.path.exists(os.environ['ANDROID_PUBLIC'] + "/characters/"):
+  File "/home/tom/ab/renpy-build-fix/tmp/install.linux-x86_64/lib/python2.7/os.py", line 425, in __getitem__
+KeyError: u'ANDROID_PUBLIC'
 
 Windows-10-10.0.19041 AMD64
 Ren'Py 7.6.3.23091805
 Doki Doki Literature Club! 1.1.0
-Sat Nov 25 22:36:45 2023
+Sun Nov 26 05:11:56 2023

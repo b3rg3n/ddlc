@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 455: u'else' is not a keyword argument or valid child of the vbox statement.
-    else:
-        ^
+File "game/ds/dsmenu.rpy", line 12: is not terminated with a newline. (Check strings and parenthesis.)
+(Perhaps you left out a " at the end of the first line.)
+                hovered Play("sound", "ds/source/audio/sfx/gui/button_menu.ogg
 
 Ren'Py Version: Ren'Py 7.6.3.23091805
-Sat Nov 25 22:26:53 2023
+Sun Nov 26 00:16:20 2023
