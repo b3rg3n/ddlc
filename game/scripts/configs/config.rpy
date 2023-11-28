@@ -1,7 +1,7 @@
 define config.name = "Doki Doki Literature Club!"
 define config.save_on_mobile_background = False
 define gui.show_name = False
-define config.version = "1.1.1"
+define config.version = "1.1.2"
 define gui.about = _("")
 define build.name = "DDLC"
 define config.has_sound = True
