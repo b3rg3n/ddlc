@@ -305,4 +305,3 @@ label natsuki_exclusive2_1:
     m "Может, начнём обмениваться стихотворениями?"
 
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

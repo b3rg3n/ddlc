@@ -44,4 +44,3 @@ label ch10_main:
     $ anticheat = persistent.anticheat
 
     jump ch20_from_ch10
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

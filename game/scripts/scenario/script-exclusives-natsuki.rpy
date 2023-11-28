@@ -635,4 +635,3 @@ label natsuki_exclusive_2_ch3:
     hide natsuki
     "Я вернулся к своему месту и засунул книгу в сумку."
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

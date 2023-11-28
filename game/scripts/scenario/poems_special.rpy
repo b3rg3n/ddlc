@@ -97,4 +97,3 @@ label poem_special_11:
     $ pause()
     $ quick_menu = True
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

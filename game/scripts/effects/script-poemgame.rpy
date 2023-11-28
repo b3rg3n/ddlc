@@ -728,4 +728,3 @@ transform sticker_hop:
     easeout_quad .18 yoffset 0
     easein_quad .18 yoffset -80
     easeout_quad .18 yoffset 0
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

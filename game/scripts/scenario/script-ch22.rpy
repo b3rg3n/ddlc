@@ -660,10 +660,4 @@ label ch22_end:
     window hide(None)
     window auto
     hide black onlayer front
-
-
-
-
-
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

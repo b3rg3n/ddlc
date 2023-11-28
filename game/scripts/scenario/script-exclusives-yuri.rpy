@@ -577,4 +577,3 @@ label yuri_exclusive_2_ch3:
     "Всё закончилось тем, что мы быстренько прибрались, не обменявшись при этом ни словом."
     "Я чувствовал, что никому из нас двоих не хватит смелости заговорить о том, что произошло..."
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

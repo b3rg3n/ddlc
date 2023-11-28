@@ -732,4 +732,3 @@ label yuri_kill_3:
     $ renpy.full_restart(transition=None, label="splashscreen")
 
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

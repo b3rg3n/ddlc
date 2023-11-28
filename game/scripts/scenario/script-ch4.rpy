@@ -1443,4 +1443,3 @@ label ch4_end_no:
     "И я сделаю всё, чтобы улыбка никогда не сходила с её лица."
 
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

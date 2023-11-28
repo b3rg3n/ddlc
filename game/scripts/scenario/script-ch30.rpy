@@ -1857,4 +1857,3 @@ label ch30_56:
     m "Поэтому я совсем не скучаю по тем денькам."
     m "Совсем нет..."
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

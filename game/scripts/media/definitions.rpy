@@ -1396,4 +1396,3 @@ label menuchr:
             $ delete_character("natsuki")
         "Вернуться":
             return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

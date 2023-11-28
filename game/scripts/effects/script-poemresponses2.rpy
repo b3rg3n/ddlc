@@ -749,4 +749,3 @@ label m2_yuri_3:
     m 1i "Не говори, что я не предупреждала тебя, [player]."
     $ skip_poem = True
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

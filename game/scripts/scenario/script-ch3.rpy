@@ -1182,4 +1182,3 @@ label ch3_end_yuri:
     hide yuri
     "Ответил я, направившись к двери, и Юри пошла за мной."
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

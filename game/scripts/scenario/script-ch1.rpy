@@ -800,4 +800,3 @@ label ch1_end_sayori:
     "Что бы она ни говорила, такой искренний человек не может быть плохим президентом."
     "Если бы только у меня был шанс пообщаться с ней чуточку больше..."
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

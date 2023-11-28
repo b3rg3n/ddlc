@@ -450,4 +450,3 @@ label ch21_end:
     window auto
 
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

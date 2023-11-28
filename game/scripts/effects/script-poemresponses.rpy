@@ -2677,4 +2677,3 @@ label m_yuri_3:
     m 1l "Прости, я имела в виду совсем не это..."
     m "Если что, с этим она может прекрасно справиться и сама."
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

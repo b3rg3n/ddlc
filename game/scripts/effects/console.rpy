@@ -82,4 +82,3 @@ label hideconsole:
 
     hide ctext
     hide chistory
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

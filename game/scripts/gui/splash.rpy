@@ -527,4 +527,3 @@ label readonly:
     "Пожалуйста, скопируйте DDLC на рабочий стол или в любую другую доступную папку и попробуйте снова."
     $ renpy.quit()
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

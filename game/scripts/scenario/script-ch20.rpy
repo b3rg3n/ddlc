@@ -497,4 +497,3 @@ label ch20_main2:
         pass
 
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

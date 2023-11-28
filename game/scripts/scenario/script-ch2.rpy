@@ -940,4 +940,3 @@ label ch2_end_shared:
     "Но если что-то делает её счастливой, я ни за что это у неё не отниму."
     "Поэтому я и сказал, что гадать тут бессмысленно."
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

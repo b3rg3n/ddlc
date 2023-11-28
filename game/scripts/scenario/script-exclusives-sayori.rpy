@@ -571,4 +571,3 @@ label sayori_exclusive_2:
     mc "Пойду возьму свой, пожалуй..."
     "Проверив, чтобы коробка с мелками была плотно закрыта, я вернулся к своему месту."
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc
