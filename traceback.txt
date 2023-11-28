@@ -1,27 +1,28 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/splash.rpy", line 1, in script
-    init -100 python:
-  File "game/splash.rpy", line 4, in <module>
-    if not os.path.exists(os.environ['ANDROID_PUBLIC'] + "/characters/"):
-KeyError: u'ANDROID_PUBLIC'
+  File "game/scripts/configs/config.rpy", line 10, in script
+    define config.main_menu_music = audio.t1
+  File "game/scripts/configs/config.rpy", line 10, in <module>
+    define config.main_menu_music = audio.t1
+AttributeError: 'StoreModule' object has no attribute 't1'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/splash.rpy", line 1, in script
-    init -100 python:
-  File "renpy/ast.py", line 1138, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "renpy/python.py", line 1122, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "game/splash.rpy", line 4, in <module>
-    if not os.path.exists(os.environ['ANDROID_PUBLIC'] + "/characters/"):
-  File "/home/tom/ab/renpy-build-fix/tmp/install.linux-x86_64/lib/python2.7/os.py", line 425, in __getitem__
-KeyError: u'ANDROID_PUBLIC'
+  File "game/scripts/configs/config.rpy", line 10, in script
+    define config.main_menu_music = audio.t1
+  File "D:\renpy-8.1.3-sdk\renpy\ast.py", line 2508, in execute
+    self.set()
+  File "D:\renpy-8.1.3-sdk\renpy\ast.py", line 2522, in set
+    value = renpy.python.py_eval_bytecode(self.code.bytecode)
+  File "D:\renpy-8.1.3-sdk\renpy\python.py", line 1146, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/scripts/configs/config.rpy", line 10, in <module>
+    define config.main_menu_music = audio.t1
+AttributeError: 'StoreModule' object has no attribute 't1'
 
-Windows-10-10.0.19041 AMD64
-Ren'Py 7.6.3.23091805
+Windows-10-10.0.19045 AMD64
+Ren'Py 8.1.3.23091805
 Doki Doki Literature Club! 1.1.0
-Sun Nov 26 05:11:56 2023
+Tue Nov 28 13:50:01 2023

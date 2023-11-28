@@ -4,7 +4,7 @@ image console_bg:
     alpha 0.75 size (480,180)
 
 style console_text:
-    font "gui/font/calibri.ttf"
+    font "gui/font/monofonto.ttf"
     color "#fff"
     size 24
     outlines []

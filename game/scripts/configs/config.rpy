@@ -1,155 +1,26 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 define config.name = "Doki Doki Literature Club!"
-
 define config.save_on_mobile_background = False
-
-
-
 define gui.show_name = False
-
-
-
-
-define config.version = "1.1.0"
-
-
-
-
-
+define config.version = "1.1.1"
 define gui.about = _("")
-
-
-
-
-
-
 define build.name = "DDLC"
-
-
-
-
-
-
 define config.has_sound = True
 define config.has_music = True
 define config.has_voice = False
-
-
-
-
-
-
-
-
-
-
-
-
-
-define config.main_menu_music = audio.t1
-
-
-
-
-
-
-
-
-
-
+define config.main_menu_music = "bgm/1.ogg" #audio.t1
 define config.enter_transition = Dissolve(.2)
 define config.exit_transition = Dissolve(.2)
-
-
-
-
 define config.after_load_transition = None
-
-
-
-
 define config.end_game_transition = Dissolve(.5)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 define config.window = "auto"
-
-
-
-
 define config.window_show_transition = Dissolve(.2)
 define config.window_hide_transition = Dissolve(.2)
-
-
-
-
-
-
-
 default preferences.text_cps = 50
-
-
-
-
-
 default preferences.afm_time = 15
-
 default preferences.music_volume = 0.75
 default preferences.sfx_volume = 0.75
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-define config.save_directory = "DDLC-1454445547"
-
-
-
-
-
-
-
+define config.save_directory = "DDLC-modloader"
 define config.window_icon = "gui/window_icon.webp"
-
-
-
 define config.allow_skipping = True
 define config.has_autosave = False
 define config.autosave_on_quit = False
@@ -181,87 +52,3 @@ init python:
             return (width, float(width) / (float(config.screen_width) / float(config.screen_height)))
         else:
             return (float(height) * (float(config.screen_width) / float(config.screen_height)), height)
-
-
-
-
-
-
-init python:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    build.archive("scripts", "all")
-    build.archive("images", "all")
-    build.archive("audio", "all")
-    build.archive("fonts", "all")
-
-    build.classify("game/**.jpg", "images")
-    build.classify("game/**.png", "images")
-    build.classify("game/**.webp", "images")
-
-    build.classify("game/**.rpyc", "scripts")
-    build.classify("game/**.txt", "scripts")
-    build.classify("game/**.chr", "scripts")
-    build.classify("game/**.wav", "audio")
-    build.classify("game/**.mp3", "audio")
-    build.classify("game/**.ogg", "audio")
-    build.classify("game/**.ttf", "fonts")
-    build.classify("game/**.otf", "audio")
-
-    build.classify('**~', None)
-    build.classify('**.bak', None)
-    build.classify('**/.**', None)
-    build.classify('**/#**', None)
-    build.classify('**/thumbs.db', None)
-    build.classify('**.rpy', None)
-    build.classify('**.psd', None)
-    build.classify('**.sublime-project', None)
-    build.classify('**.sublime-workspace', None)
-    build.classify('/music/*.*', None)
-    build.classify('script-regex.txt', None)
-    build.classify('/game/10', None)
-    build.classify('/game/cache/*.*', None)
-
-
-
-
-
-
-
-
-
-    build.documentation('*.html')
-    build.documentation('*.txt')
-
-    build.include_old_themes = False
-
-
-
-
-
-
-
-
-
-
-
-define build.itch_project = "teamsalvato/ddlc"
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

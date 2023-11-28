@@ -23,36 +23,28 @@ init python:
         else :
             try: os.remove(config.basedir + "/characters/" + name + ".chr")
             except: pass
+    def restore_character(names):
+        import os
+        if not isinstance(names, list):
+            raise Exception("'names' parameter must be a list. Example: [\"monika\", \"sayori\"].")
+
+        for x in names:
+            if renpy.android:
+                try: renpy.file(os.environ['ANDROID_PUBLIC'] + "/characters/" + x + ".chr")
+                except: open(os.environ['ANDROID_PUBLIC'] + "/characters/" + x + ".chr", "wb").write(renpy.file("restore/" + x + ".chr").read())
+            else:
+                try: renpy.file(config.basedir + "/characters/" + x + ".chr")
+                except: open(config.basedir + "/characters/" + x + ".chr", "wb").write(renpy.file("restore/" + x + ".chr").read())
+
     def restore_all_characters():
-        if renpy.android :
-            import os
-            try: 
-                with open(os.environ['ANDROID_PUBLIC'] + "/characters/monika.chr", "rb") as f: 
-                    pass
-            except: open(os.environ['ANDROID_PUBLIC'] + "/characters/monika.chr", "wb").write(renpy.file("monika.chr").read())
-            try: 
-                with open(os.environ['ANDROID_PUBLIC'] + "/characters/natsuki.chr", "rb") as f: 
-                    pass
-            except: open(os.environ['ANDROID_PUBLIC'] + "/characters/natsuki.chr", "wb").write(renpy.file("natsuki.chr").read())
-            try: 
-                with open(os.environ['ANDROID_PUBLIC'] + "/characters/yuri.chr", "rb") as f: 
-                    pass
-            except: open(os.environ['ANDROID_PUBLIC'] + "/characters/yuri.chr", "wb").write(renpy.file("yuri.chr").read())
-            try: 
-                with open(os.environ['ANDROID_PUBLIC'] + "/characters/sayori.chr", "rb") as f: 
-                    pass
-            except: 
-                with open(os.environ['ANDROID_PUBLIC'] + "/characters/sayori.chr", "wb") as f:
-                    f.write(renpy.file("sayori.chr").read())
-        else :
-            try: renpy.file('../characters/monika.chr')
-            except: open(config.basedir + "/characters/monika.chr", "w").write(renpy.file("monika.chr").read())
-            try: renpy.file("../characters/natsuki.chr")
-            except: open(config.basedir + "/characters/natsuki.chr", "wb").write(renpy.file("natsuki.chr").read())
-            try: renpy.file("../characters/yuri.chr")
-            except: open(config.basedir + "/characters/yuri.chr", "wb").write(renpy.file("yuri.chr").read())
-            try: renpy.file("../characters/sayori.chr")
-            except: open(config.basedir + "/characters/sayori.chr", "wb").write(renpy.file("sayori.chr").read())
+        if persistent.playthrough == 0:
+            restore_character(["monika", "sayori", "natsuki", "yuri"])
+        elif persistent.playthrough == 1 or persistent.playthrough == 2:
+            restore_character(["monika", "natsuki", "yuri"])
+        elif persistent.playthrough == 3:
+            restore_character(["monika"])
+        else:
+            restore_character(["sayori", "natsuki", "yuri"])
     def pause(time=None):
         if not time:
             renpy.ui.saybehavior(afm=" ")
@@ -1335,7 +1327,8 @@ default chapter = 0
 default currentpos = 0
 default faint_effect = None
 
-default s_name = "Саёри"
+default persistent.sayoriname = "Саёри"
+default s_name = "[persistent.sayoriname]"
 default m_name = "Моника"
 default n_name = "Нацуки"
 default y_name = "Юри"

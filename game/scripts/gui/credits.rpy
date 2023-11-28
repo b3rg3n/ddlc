@@ -622,7 +622,6 @@ label credits2:
     play sound page_turn
     show poem_end with Dissolve(1)
     label postcredits_loop:
-        $ persistent.autoload = "postcredits_loop"
         $ config.keymap['game_menu'] = []
         $ config.keymap['hide_windows'] = []
         $ renpy.display.behavior.clear_keymap_cache()
@@ -632,6 +631,14 @@ label credits2:
         scene black
         show poem_end
         $ pause()
-        call screen dialog(message="Ошибка: файл скрипта удалён или повреждён.\nПожалуйста, переустановите игру.", ok_action=Quit(confirm=False))
-        return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc
+        call screen dialog(message="Ошибка: файл скрипта удалён или повреждён.\nПожалуйста, переустановите игру.", ok_action=Return())
+        call screen dialog(message="Переустановить?", ok_action=Return())
+        call screen dialog(message="Ладно, щас всё сделаю...", ok_action=Return())
+        $ delete_all_saves()
+        $ restore_all_characters()
+        $ s_kill_early = None
+        $ persistent.autoload = False
+        $ persistent.first_run = False
+        $ persistent.playthrough = 0
+        call screen dialog(message="Готово.", ok_action=Return())
+        $ renpy.full_restart(transition=None, label="splashscreen")

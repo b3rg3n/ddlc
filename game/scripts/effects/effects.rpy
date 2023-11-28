@@ -10,7 +10,7 @@ init python:
         return srf
 
     def invert():
-        srf = screenshot_srf()
+        srf = srf or screenshot_srf()
         inv = renpy.Render(srf.get_width(), srf.get_height()).canvas().get_surface()
         inv.fill((255,255,255,255))
         inv.blit(srf, (0,0), None, 2) 
@@ -46,7 +46,6 @@ screen invert(length, delay=0.0):
 
 
 init python:
-    import random
     class TearPiece:
         def __init__(self, startY, endY, offtimeMult, ontimeMult, offsetMin, offsetMax):
             self.startY = startY
@@ -63,13 +62,12 @@ init python:
                 self.offset = random.randint(self.offsetMin, self.offsetMax)
             elif st <= self.offTime and self.offset != 0:
                 self.offset = 0
-
-
+    
     class Tear(renpy.Displayable):
         def __init__(self, number, offtimeMult, ontimeMult, offsetMin, offsetMax, srf=None):
             super(Tear, self).__init__()
             self.width, self.height = renpy.get_physical_size()
-            
+
             if float(self.width) / float(self.height) > 16.0/9.0:
                 self.width = self.height * 16 / 9
             else:
@@ -77,11 +75,11 @@ init python:
             self.number = number
             if not srf: self.srf = screenshot_srf()
             else: self.srf = srf
-            
+
             self.pieces = []
             tearpoints = [0, self.height]
             for i in range(number):
-                tearpoints.append(random.randint(10, self.height - 10))
+                tearpoints.append(random.randint(10, int(self.height) - 10))
             tearpoints.sort()
             for i in range(number+1):
                 self.pieces.append(TearPiece(tearpoints[i], tearpoints[i+1], offtimeMult, ontimeMult, offsetMin, offsetMax))
@@ -112,7 +110,6 @@ image m_rectstatic3:
     RectStatic(im.FactorScale(im.Crop("gui/menu_art_s.webp", (100, 100, 64, 64)), 0.5), 2, 32, 32).sm
 
 init python:
-    import math
     class RectStatic(object):
         def __init__(self, theDisplayable, numRects=12, rectWidth = 30, rectHeight = 30):
             self.sm = SpriteManager(update=self.update)
@@ -142,10 +139,11 @@ init python:
                     s.y = random.randint(0, 23) * 32
                     self.timers[i] = st + random.random() * 0.4 + 0.1
             return 0
+
     class ParticleBurst(object):
-        def __init__(self, theDisplayable, explodeTime=0, numParticles=20, particleTime = 0.500, particleXSpeed = 3, particleYSpeed = 3):
+        def __init__(self, theDisplayable, explodeTime=0, numParticles=20, particleTime = 0.500, particleXSpeed = 3, particleYSpeed = 5):
             self.sm = SpriteManager(update=self.update)
-            
+
             self.stars = [ ]
             self.displayable = theDisplayable
             self.explodeTime = explodeTime
@@ -153,7 +151,7 @@ init python:
             self.particleTime = particleTime
             self.particleXSpeed = particleXSpeed
             self.particleYSpeed = particleYSpeed
-            self.gravity = 3
+            self.gravity = 240
             self.timePassed = 0
             
             for i in range(self.numParticles):
@@ -161,10 +159,12 @@ init python:
         
         def add(self, d, speed):
             s = self.sm.create(d)
-            ySpeed = (random.random() - 0.5) * self.particleYSpeed
-            xSpeed = (random.random() - 0.5) * self.particleXSpeed
-            s.x += xSpeed * 40
-            s.y += ySpeed * 40
+            speed = random.random()
+            angle = random.random() * 3.14159 * 2
+            xSpeed = speed * math.cos(angle) * self.particleXSpeed
+            ySpeed = speed * math.sin(angle) * self.particleYSpeed - 1
+            s.x = xSpeed * 24
+            s.y = ySpeed * 24
             pTime = self.particleTime
             self.stars.append((s, ySpeed, xSpeed, pTime))
         
@@ -172,14 +172,14 @@ init python:
             sindex=0
             for s, ySpeed, xSpeed, particleTime in self.stars:
                 if (st < particleTime):
-                    s.x += xSpeed
-                    s.y += (ySpeed + (self.gravity * st))
+                    s.x = xSpeed * 120 * (st + .20)
+                    s.y = (ySpeed * 120 * (st + .20) + (self.gravity * st * st))
                 else:
                     s.destroy()
                     self.stars.pop(sindex)
                 sindex += 1
             return 0
-
+    
     class Blood(object):
         def __init__(self, theDisplayable, density=120.0, particleTime=1.0, dripChance=0.05, dripSpeedX=0.0, dripSpeedY=120.0, dripTime=180.0, burstSize=100, burstSpeedX=200.0, burstSpeedY=400.0, numSquirts=4, squirtPower=400, squirtTime=0.25):
             self.sm = SpriteManager(update=self.update)
@@ -214,7 +214,7 @@ init python:
             ySpeed = (random.random() - 0.75) * self.burstSpeedY + 20
             pTime = self.particleTime
             self.drops.append([s, xSpeed, ySpeed, pTime, startTime])
-        
+
         def add_drip(self, d, startTime):
             s = self.sm.create(d)
             xSpeed = (random.random() - 0.5) * self.dripSpeedX + 20
@@ -226,7 +226,7 @@ init python:
             delta = st - self.lastUpdate
             self.delta += st - self.lastUpdate
             self.lastUpdate = st
-            
+
             sindex = 0
             for xSpeed, ySpeed, squirtTime in self.squirts:
                 if st > squirtTime: self.squirts.pop(sindex)
@@ -253,10 +253,7 @@ init python:
                 pindex += 1
             return 0
 
-
 init python:
-    ## AnimatedMask
-    # This class declares the code used for the AnimatedMask effect in Act 3.
     class AnimatedMask(renpy.Displayable):
         
         def __init__(self, child, mask, maskb, oc, op, moving=True, speed=1.0, frequency=1.0, amount=0.5, **properties):
@@ -317,11 +314,9 @@ init python:
 
                 op = self.op
 
-                # Prevent a DBZ if the user gives us a 0 ramp.
                 if op < 1:
                     op = 1
 
-                # Compute the offset to apply to the alpha.
                 start = -1.0
                 end = op / 256.0
                 offset = start + (end - start) * complete
@@ -340,12 +335,9 @@ init python:
             renpy.redraw(self, 0)
             return rv
 
-    # This function makes a image be transparent for a bit then 
-    # fade in and out in Act 3.
     def monika_alpha(trans, st, at):
         trans.alpha = math.pow(math.sin(st / 8), 64) * 1.4
         return 0
-
 
 image blood_particle_drip:
     "gui/blood_drop.webp"
@@ -431,4 +423,3 @@ image veins:
         choice:
             xoffset -2
         repeat
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

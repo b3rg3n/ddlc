@@ -1,14 +1,5 @@
 init offset = -1
 
-
-
-
-
-
-
-
-
-
 style default:
     font gui.default_font
     size gui.text_size
@@ -87,12 +78,6 @@ style prompt_text is gui_text:
     color gui.text_color
     size gui.interface_text_size
 
-
-
-
-
-
-
 style vbar:
     xsize gui.bar_size
     top_bar Frame("gui/bar/top.webp", gui.vbar_borders, tile=gui.bar_tile)
@@ -110,18 +95,12 @@ style scrollbar:
     unscrollable "hide"
     bar_invert True
 
-
 style vscrollbar:
     xsize 18
     base_bar Frame("gui/scrollbar/vertical_poem_bar.webp", tile=False)
     thumb Frame("gui/scrollbar/vertical_poem_thumb.webp", left=6, top=6, tile=True)
     unscrollable "hide"
     bar_invert True
-
-
-
-
-
 
 style slider:
     ysize 18
@@ -137,26 +116,6 @@ style vslider:
 style frame:
     padding gui.frame_borders.padding
     background Frame("gui/frame.webp", gui.frame_borders, tile=gui.frame_tile)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 screen say(who, what):
     style_prefix "say"
@@ -187,7 +146,6 @@ style say_thought is say_dialogue
 
 style namebox is default
 style namebox_label is say_label
-
 
 style window:
     xalign 0.5
@@ -235,16 +193,6 @@ image ctc:
         easein 0.75 alpha 0.5 xoffset -5
         repeat
 
-
-
-
-
-
-
-
-
-
-
 image input_caret:
     Solid("#b59")
     size (2,25) subpixel True
@@ -266,7 +214,6 @@ screen input(prompt):
         text prompt style "input_prompt"
         input id "input"
 
-
 style input_prompt is default
 
 style input_prompt:
@@ -280,15 +227,6 @@ style input:
     xalign 0.5
     text_align 0.5
 
-
-
-
-
-
-
-
-
-
 screen choice(items):
     style_prefix "choice"
 
@@ -296,11 +234,7 @@ screen choice(items):
         for i in items:
             textbutton i.caption action i.action
 
-
-
-
 define config.narrator_menu = True
-
 
 style choice_vbox is vbox
 style choice_button is button
@@ -339,11 +273,7 @@ screen rigged_choice(items):
 
     timer 1.0/30.0 repeat True action Function(RigMouse)
 
-
-
-
 define config.narrator_menu = True
-
 
 style choice_vbox is vbox
 style choice_button is button
@@ -365,14 +295,7 @@ style choice_button_text is default:
     properties gui.button_text_properties("choice_button")
     outlines []
 
-
-
-
-
-
-
 screen quick_menu():
-
 
     zorder 100
 
@@ -391,20 +314,9 @@ screen quick_menu():
             textbutton _("Авто") action Preference("auto-forward", "toggle")
             textbutton _("Сохранить") action ShowMenu('save')
             textbutton _("Загрузить") action ShowMenu('load')
-
-
             textbutton _("Настройки") action ShowMenu('preferences')
 
-
-
-
-
-
-
 default quick_menu = True
-
-
-
 
 style quick_button:
     properties gui.button_properties("quick_button")
@@ -413,16 +325,6 @@ style quick_button:
 style quick_button_text:
     properties gui.button_text_properties("quick_button")
     outlines []
-
-
-
-
-
-
-
-
-
-
 
 init python:
     def FinishEnterName():
@@ -495,17 +397,7 @@ style navigation_button_text:
     hover_outlines [(4, "#fac", 0, 0), (2, "#fac", 2, 2)]
     insensitive_outlines [(4, "#fce", 0, 0), (2, "#fce", 2, 2)]
 
-
-
-
-
-
-
-
 screen main_menu():
-
-
-
 
     style_prefix "main_menu" tag menu
 
@@ -518,9 +410,6 @@ screen main_menu():
         add "menu_art_y"
         add "menu_art_n"
         frame
-
-
-
 
         use navigation
 
@@ -584,16 +473,6 @@ style main_menu_text:
 
 style main_menu_title:
     size gui.title_text_size
-
-
-
-
-
-
-
-
-
-
 
 screen game_menu_m():
     $ persistent.menu_bg_m = True
@@ -723,20 +602,8 @@ style return_button:
     yalign 1.0
     yoffset -30
 
-
-
-
-
-
-
-
-
 screen about():
     tag menu
-
-
-
-
 
     use game_menu(_("Об игре"), scroll="viewport"):
 
@@ -753,10 +620,7 @@ screen about():
 
             text _("Создано с помощью {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
-
-
 define gui.about = ""
-
 
 style about_label is gui_label
 style about_label_text is gui_label_text
@@ -765,26 +629,13 @@ style about_text is gui_text
 style about_label_text:
     size gui.label_text_size
 
-
-
-
-
-
-
-
-
-
-
 screen save():
     tag menu
 
-
     use file_slots(_("Сохранить"))
-
 
 screen load():
     tag menu
-
 
     use file_slots(_("Загрузить"))
 
@@ -807,18 +658,12 @@ screen file_slots(title):
 
         fixed:
 
-
-
             order_reverse True
-
-
 
             button:
                 style "page_label"
 
-
                 xalign 0.5
-
 
                 input:
                     style "page_label_text"
@@ -860,13 +705,6 @@ screen file_slots(title):
                 yalign 1.0
 
                 spacing gui.page_spacing
-
-
-
-
-
-
-
 
                 for page in range(1, 10):
                     textbutton "[page]" action FilePage(page)
@@ -910,17 +748,8 @@ style slot_button_text:
     color "#666"
     outlines []
 
-
-
-
-
-
-
-
-
 screen preferences():
     tag menu
-
 
     if renpy.mobile:
         $ cols = 2
@@ -956,9 +785,27 @@ screen preferences():
                     textbutton _("Непрочитанный текст") action Preference("skip", "toggle")
                     textbutton _("После выборов") action Preference("after choices", "toggle")
 
+                vbox:
+                    style_prefix "check"
+                    label _("Дополнительно")
+                    textbutton _("Без цензуры") action If(persistent.uncensored_mode, 
+                        ToggleField(persistent, "uncensored_mode"), 
+                        Show("confirm", message="Вы действительно хотите включить режим без цензуры?\nЭто действие позволит вам включить взрослый/чувствительный\nконтент в вашем прохождении.\n\nЭта настройка зависит от того, включил ли\nавтор модификации эти галочки в его историю.", 
+                            yes_action=[Hide("confirm"), ToggleField(persistent, "uncensored_mode")],
+                            no_action=Hide("confirm")
+                        ))
+                    textbutton _("Let's Play") action If(persistent.lets_play, 
+                        ToggleField(persistent, "lets_play"),
+                        [ToggleField(persistent, "lets_play"), Show("dialog", 
+                            message="Вы включили режим Let's Play.\nЭта настройка позволит вам пропускать контент, который\nсодержит чувствительный/взрослый контент,\nили изменить настройки истории.\n\nЭта настройка зависит от того, включил ли\nавтор модификации эти галочки в его историю.", 
+                            ok_action=Hide("dialog")
+                        )])
 
-
-
+                vbox:
+                    style_prefix "check"
+                    label _("Сайори/Саёри")
+                    textbutton _("Сайори") action SetField(persistent, "sayoriname", "Сайори")
+                    textbutton _("Саёри") action SetField(persistent, "sayoriname", "Саёри")
 
             null height (4 * gui.pref_spacing)
 
@@ -1011,7 +858,7 @@ screen preferences():
                         textbutton _("Отключить все"):
                             action Preference("all mute", "toggle")
                             style "mute_all_button"
-    text "v[config.version]":
+    text "engine ver. [renpy.version_only] | game ver. [config.version]":
         xalign 1.0 yalign 1.0
         xoffset -10 yoffset -10
         style "main_menu_version"
@@ -1097,28 +944,19 @@ style slider_vbox:
 
 
 
-
-
-
-
-
-
 screen history():
+    tag menu
+    
+    predict False
 
-
-
-
-    predict False tag menu
-
-    use game_menu(_("История"), scroll=("vpgrid" if gui.history_height else "viewport")):
-
+    use game_menu(_("History"), scroll=("vpgrid" if gui.history_height else "viewport")):
+        
         style_prefix "history"
-
+       
         for h in _history_list:
-
+            
             window:
-
-
+                
                 has fixed:
                     yfit True
 
@@ -1126,17 +964,19 @@ screen history():
 
                     label h.who:
                         style "history_name"
-
-
-
+                        substitute False
+                        
                         if "color" in h.who_args:
                             text_color h.who_args["color"]
 
-                text h.what
+                $ what = renpy.filter_text_tags(h.what, allow=gui.history_allow_tags)
+                text what:
+                    substitute False
 
         if not _history_list:
-            label _("История пуста.")
+            label _("The dialogue history is empty.")
 
+define gui.history_allow_tags = set()
 
 style history_window is empty
 
@@ -1178,177 +1018,6 @@ style history_label:
 style history_label_text:
     xalign 0.5
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 screen name_input(message, ok_action):
 
 
@@ -1373,11 +1042,6 @@ screen name_input(message, ok_action):
             xalign 0.5
 
         input default "" value VariableInputValue("player") length 12 allow "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЪЫЭЮЯабвгдеёжзийклмнопрстуфхцчшщьъыэюя"
-
-
-
-
-
 
         hbox:
             xalign 0.5
@@ -1454,9 +1118,6 @@ screen confirm(message, yes_action, no_action):
             textbutton _("Нет") action no_action
 
 
-
-
-
 style confirm_frame is gui_frame
 style confirm_prompt is gui_prompt
 style confirm_prompt_text is gui_prompt_text
@@ -1483,13 +1144,6 @@ style confirm_button:
 style confirm_button_text is navigation_button_text:
     properties gui.button_text_properties("confirm_button")
 
-
-
-
-
-
-
-
 screen fake_skip_indicator():
     use skip_indicator
 
@@ -1508,8 +1162,6 @@ screen skip_indicator():
         text "▸" at delayed_blink(0.0, 1.0) style "skip_triangle"
         text "▸" at delayed_blink(0.2, 1.0) style "skip_triangle"
         text "▸" at delayed_blink(0.4, 1.0) style "skip_triangle"
-
-
 
 transform delayed_blink(delay, cycle):
     alpha .5
@@ -1538,16 +1190,7 @@ style skip_text:
 
 style skip_triangle:
 
-
     font "DejaVuSans.ttf"
-
-
-
-
-
-
-
-
 
 screen notify(message):
 
@@ -1579,4 +1222,3 @@ style notify_frame:
 
 style notify_text:
     size gui.notify_text_size
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

@@ -2,9 +2,7 @@
 errors listed below, and try again.
 
 
-File "game/ds/dsmenu.rpy", line 12: is not terminated with a newline. (Check strings and parenthesis.)
-(Perhaps you left out a " at the end of the first line.)
-                hovered Play("sound", "ds/source/audio/sfx/gui/button_menu.ogg
+File "game/scripts/gui/gestrues.rpy", line 6: Unexpected indentation at start of file.
 
-Ren'Py Version: Ren'Py 7.6.3.23091805
-Sun Nov 26 00:16:20 2023
+Ren'Py Version: Ren'Py 8.1.3.23091805
+Tue Nov 28 14:14:48 2023

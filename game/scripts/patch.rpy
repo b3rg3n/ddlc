@@ -1,7 +1,4 @@
-
 init -2 python:
-
-
     layout.ARE_YOU_SURE = _("Вы уверены?")
     layout.DELETE_SAVE = _("Вы действительно хотите удалить сохранение?")
     layout.OVERWRITE_SAVE = _("Вы действительно хотите перезаписать сохранение?")
@@ -12,4 +9,8 @@ init -2 python:
     layout.SLOW_SKIP = _("Вы уверены, что хотите начать пропуск текста?")
     layout.FAST_SKIP_UNSEEN = _("Вы уверены, что хотите пропустить непрочитанный текст до следующего выбора?")
     layout.FAST_SKIP_SEEN = _("Вы уверены, что хотите перейти к следующему выбору?")
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc
+
+init -999:
+    define config.developer = False
+    define config.variants = [ "large", "pc", "touch", None ]
+    define config.hw_video = False

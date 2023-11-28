@@ -1,8 +1,8 @@
 
-
+init python:
+    import math
 
 label start:
-
 
     $ anticheat = persistent.anticheat
 
