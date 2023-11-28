@@ -2,6 +2,11 @@
 game/cache/
 game/saves/
 game/tl/
+game/cache/shaders.txt
+log.txt
+traceback.txt
+errors.txt
+error.txt
 *.rpyc
 *.rpyb
 *.rpym
