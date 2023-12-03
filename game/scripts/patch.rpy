@@ -14,3 +14,6 @@ init -999:
     define config.developer = False
     define config.variants = [ "large", "pc", "touch", None ]
     define config.hw_video = False
+    $ number_of_options = 13
+    $ bergenmods = False
+    $ modistalled = False

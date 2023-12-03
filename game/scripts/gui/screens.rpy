@@ -351,7 +351,8 @@ screen navigation():
                     textbutton _("ŔŗñĮ¼»ŧþŀÂŻŕěōì«") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Пожалуйста, введите своё имя", ok_action=Function(FinishEnterName)))
                 else:
                     textbutton _("Новая игра") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Пожалуйста, введите своё имя", ok_action=Function(FinishEnterName)))
-                    textbutton _("Моды") action ShowMenu("modsloader")
+                    if modistalled == True:
+                        textbutton _("Моды") action ShowMenu("modsloader")
 
             else:
 
@@ -764,14 +765,14 @@ screen preferences():
             hbox:
                 box_wrap True
 
-                if renpy.variant("pc"):
+                if renpy.variant("pc") and number_of_options > 0:
 
                     vbox:
                         style_prefix "radio"
                         label _("Режим")
                         textbutton _("Оконный") action Preference("display", "window")
                         textbutton _("Полноэкранный") action Preference("display", "fullscreen")
-                if config.developer:
+                if config.developer and number_of_options > 1:
                     vbox:
                         style_prefix "radio"
                         label _("Режим прокрутки")
@@ -781,31 +782,42 @@ screen preferences():
 
                 vbox:
                     style_prefix "check"
-                    label _("Пропускать")
-                    textbutton _("Непрочитанный текст") action Preference("skip", "toggle")
-                    textbutton _("После выборов") action Preference("after choices", "toggle")
+                    if number_of_options > 2:
+                        label _("Пропускать")
+                        textbutton _("Непрочитанный текст") action Preference("skip", "toggle")
+                        textbutton _("После выборов") action Preference("after choices", "toggle")
 
                 vbox:
                     style_prefix "check"
-                    label _("Дополнительно")
-                    textbutton _("Без цензуры") action If(persistent.uncensored_mode, 
-                        ToggleField(persistent, "uncensored_mode"), 
-                        Show("confirm", message="Вы действительно хотите включить режим без цензуры?\nЭто действие позволит вам включить взрослый/чувствительный\nконтент в вашем прохождении.\n\nЭта настройка зависит от того, включил ли\nавтор модификации эти галочки в его историю.", 
-                            yes_action=[Hide("confirm"), ToggleField(persistent, "uncensored_mode")],
-                            no_action=Hide("confirm")
-                        ))
-                    textbutton _("Let's Play") action If(persistent.lets_play, 
-                        ToggleField(persistent, "lets_play"),
-                        [ToggleField(persistent, "lets_play"), Show("dialog", 
-                            message="Вы включили режим Let's Play.\nЭта настройка позволит вам пропускать контент, который\nсодержит чувствительный/взрослый контент,\nили изменить настройки истории.\n\nЭта настройка зависит от того, включил ли\nавтор модификации эти галочки в его историю.", 
-                            ok_action=Hide("dialog")
-                        )])
+                    if number_of_options > 3:
+                        label _("Дополнительно")
+                        textbutton _("Без цензуры") action If(persistent.uncensored_mode, 
+                            ToggleField(persistent, "uncensored_mode"), 
+                            Show("confirm", message="Вы действительно хотите включить режим без цензуры?\nЭто действие позволит вам включить взрослый/чувствительный\nконтент в вашем прохождении.\n\nЭта настройка зависит от того, включил ли\nавтор модификации эти галочки в его историю.", 
+                                yes_action=[Hide("confirm"), ToggleField(persistent, "uncensored_mode")],
+                                no_action=Hide("confirm")
+                            ))
+                        if number_of_options > 4:
+                            textbutton _("Let's Play") action If(persistent.lets_play, 
+                                ToggleField(persistent, "lets_play"),
+                                [ToggleField(persistent, "lets_play"), Show("dialog", 
+                                    message="Вы включили режим Let's Play.\nЭта настройка позволит вам пропускать контент, который\nсодержит чувствительный/взрослый контент,\nили изменить настройки истории.\n\nЭта настройка зависит от того, включил ли\nавтор модификации эти галочки в его историю.", 
+                                    ok_action=Hide("dialog")
+                                )])
+                        if bergenmods == True and number_of_options > 5:
+                            textbutton _("Виджет музыки") action If(persistent.music_widget_7dl, 
+                                ToggleField(persistent, "music_widget_7dl"),
+                                [ToggleField(persistent, "music_widget_7dl"), Show("dialog", 
+                                    message="Вы включили виджет с названиями\nигращих треков.\nЭта настройка позволит вам узнавать названия треков,\nкоторые сейчас играют.\nРаботает только в модах от BERGEN'a.", 
+                                    ok_action=Hide("dialog")
+                                )])
 
                 vbox:
                     style_prefix "check"
-                    label _("Сайори/Саёри")
-                    textbutton _("Сайори") action SetField(persistent, "sayoriname", "Сайори")
-                    textbutton _("Саёри") action SetField(persistent, "sayoriname", "Саёри")
+                    if number_of_options > 6:
+                        label _("Сайори/Саёри")
+                        textbutton _("Сайори") action SetField(persistent, "sayoriname", "Сайори")
+                        textbutton _("Саёри") action SetField(persistent, "sayoriname", "Саёри")
 
             null height (4 * gui.pref_spacing)
 
@@ -814,28 +826,24 @@ screen preferences():
                 box_wrap True
 
                 vbox:
-
-                    label _("Скорость вывода текста")
-
-
-                    bar value FieldValue(_preferences, "text_cps", range=180, max_is_zero=False, style="slider", offset=20)
-
-                    label _("Интервал авточтения")
-
-                    bar value Preference("auto-forward time")
-
+                    if number_of_options > 7:
+                        label _("Скорость вывода текста")
+                        bar value FieldValue(_preferences, "text_cps", range=180, max_is_zero=False, style="slider", offset=20)
+                    if number_of_options > 8:
+                        label _("Интервал авточтения")
+                        bar value Preference("auto-forward time")
+                    if number_of_options >= 0:
+                        label ("Количество опций")
+                        bar value FieldValue(store,"number_of_options",range=13, style="slider")
                 vbox:
 
-                    if config.has_music:
+                    if config.has_music and number_of_options > 9:
                         label _("Громкость музыки")
-
                         hbox:
                             bar value Preference("music volume")
 
-                    if config.has_sound:
-
+                    if config.has_sound and number_of_options > 10:
                         label _("Громкость звуков")
-
                         hbox:
                             bar value Preference("sound volume")
 
@@ -843,19 +851,17 @@ screen preferences():
                                 textbutton _("Тест") action Play("sound", config.sample_sound)
 
 
-                    if config.has_voice:
+                    if config.has_voice and number_of_options > 11:
                         label _("Громкость голосов")
-
                         hbox:
                             bar value Preference("voice volume")
-
                             if config.sample_voice:
                                 textbutton _("Test") action Play("voice", config.sample_voice)
 
-                    if config.has_music or config.has_sound or config.has_voice:
+                    if number_of_options > 12:
+#                    if config.has_music or config.has_sound or config.has_voice and number_of_options > 12:
                         null height gui.pref_spacing
-
-                        textbutton _("Отключить все"):
+                        textbutton _("Отключить всё"):
                             action Preference("all mute", "toggle")
                             style "mute_all_button"
     text "engine ver. [renpy.version_only]\ngame ver. [config.version]":
