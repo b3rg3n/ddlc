@@ -811,6 +811,12 @@ screen preferences():
                                     message="Вы включили виджет с названиями\nигращих треков.\nЭта настройка позволит вам узнавать названия треков,\nкоторые сейчас играют.\nРаботает только в модах от BERGEN'a.", 
                                     ok_action=Hide("dialog")
                                 )])
+                            textbutton _("Увеличить шрифт") action If(persistent.bazarbig, 
+                                ToggleField(persistent, "bazarbig"), 
+                                Show("confirm", message="Вы действительно хотите увеличить размер шрифта?\nОкно вывода текста будет увеличено вместе с ним.\nРаботает только в модах от BERGEN'a.", 
+                                    yes_action=[Hide("confirm"), ToggleField(persistent, "bazarbig")],
+                                    no_action=Hide("confirm")
+                                    ))
 
                 vbox:
                     style_prefix "check"
