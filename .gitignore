@@ -2,6 +2,8 @@
 game/cache/
 game/saves/
 game/tl/
+game/renpy-ActionEditor3-master/
+game/ds/
 game/cache/shaders.txt
 log.txt
 traceback.txt

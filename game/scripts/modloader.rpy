@@ -1,6 +1,7 @@
 # Нихуёво, а? Ахах. Всё до безумия просто, но поебаться придётся. Как же без этого?
 # Скрипт модлоадера присрал @b3rg3n.
 python early:
+    config.allow_duplicate_labels = True
     mods = {}
 
 init -501 screen modsloader:

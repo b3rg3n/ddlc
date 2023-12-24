@@ -11,7 +11,7 @@ init -2 python:
     layout.FAST_SKIP_SEEN = _("Вы уверены, что хотите перейти к следующему выбору?")
 
 init -999:
-    define config.developer = False
+    define config.developer = True
     define config.variants = [ "large", "pc", "touch", None ]
     define config.hw_video = False
     $ number_of_options = 13
