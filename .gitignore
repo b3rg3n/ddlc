@@ -7,6 +7,10 @@ log.txt
 traceback.txt
 errors.txt
 error.txt
+android.json
+android.keystore
+bundle.keystore
+project.json
 *.rpyc
 *.rpyb
 *.rpym
