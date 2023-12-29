@@ -440,7 +440,8 @@ label after_load:
             $ persistent.yuri_kill = 200
         jump expression persistent.autoload
 
-#    elif anticheat != persistent.anticheat:
+    elif anticheat != persistent.anticheat:
+        return
 #        stop music
 #        scene black
 #        "Не удалось загрузить сохрание."
