@@ -831,9 +831,9 @@ screen preferences():
                                     ok_action=Hide("dialog")
                                 )])
                         if bergenmods == True and number_of_options > 5:
-                            textbutton _("Виджет музыки") action If(persistent.music_widget_7dl, 
-                                ToggleField(persistent, "music_widget_7dl"),
-                                [ToggleField(persistent, "music_widget_7dl"), Show("dialog", 
+                            textbutton _("Виджет музыки") action If(persistent.music_widget, 
+                                ToggleField(persistent, "music_widget"),
+                                [ToggleField(persistent, "music_widget"), Show("dialog", 
                                     message="Вы включили виджет с названиями\nигращих треков.\nЭта настройка позволит вам узнавать названия треков,\nкоторые сейчас играют.\nРаботает только в модах от BERGEN'a.", 
                                     ok_action=Hide("dialog")
                                 )])
@@ -841,6 +841,12 @@ screen preferences():
                                 ToggleField(persistent, "bazarbig"), 
                                 Show("confirm", message="Вы действительно хотите увеличить размер шрифта?\nОкно вывода текста будет увеличено вместе с ним.\nРаботает только в модах от BERGEN'a.", 
                                     yes_action=[Hide("confirm"), ToggleField(persistent, "bazarbig")],
+                                    no_action=Hide("confirm")
+                                    ))
+                            textbutton _("Отключить QTE") action If(persistent.qteoff, 
+                                ToggleField(persistent, "qteoff"), 
+                                Show("confirm", message="Вы действительно хотите отключить QTE?\nМожет привести к <<оказуаливанию>> геймплея.\nРаботает только в модах от BERGEN'a.", 
+                                    yes_action=[Hide("confirm"), ToggleField(persistent, "qteoff")],
                                     no_action=Hide("confirm")
                                     ))
 
