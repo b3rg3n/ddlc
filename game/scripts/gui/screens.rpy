@@ -117,6 +117,32 @@ style frame:
     padding gui.frame_borders.padding
     background Frame("gui/frame.webp", gui.frame_borders, tile=gui.frame_tile)
 
+screen modsloader:
+    tag menu
+    add "menu_bg"
+    add "menu_art_y"
+    add "menu_art_n"
+    add "menu_art_s"
+    add "menu_art_m"
+    add "menu_particles"
+    frame:
+        style "mods_menu_frame"
+
+    textbutton _("Вернуться"):
+        xpos 40 ypos 660
+        action [Hide("modsloader"), Show("main_menu")]
+
+    vbox:
+        for lbl, name in sorted(mods.items()):
+            textbutton name xpos 40 ypos 260 action Start(lbl)
+
+
+style mods_menu_frame:
+    xsize 310
+    yfill True
+
+    background "mods_menu_nav"
+
 screen say(who, what):
     style_prefix "say"
 

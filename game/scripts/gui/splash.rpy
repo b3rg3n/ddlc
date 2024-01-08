@@ -124,6 +124,9 @@ image menu_nav:
     "gui/overlay/main_menu.webp"
     menu_nav_move
 
+image mods_menu_nav:
+    "gui/overlay/main_menu.webp"
+
 image menu_logo:
     "gui/logo.webp"
     subpixel True
