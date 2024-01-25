@@ -443,23 +443,23 @@ label after_load:
             $ persistent.yuri_kill = 200
         jump expression persistent.autoload
 
-    elif anticheat != persistent.anticheat:
-        stop music
-        scene black
-        "Не удалось загрузить сохрание."
-        "Пытаешься читерить?"
-        $ m_name = "Моника"
-        show monika 1 at t11
-        if persistent.playername == "":
-            m "Ты какой смешной."
-        else:
-            m "Ты такой смешной, [persistent.playername]."
-        $ renpy.utter_restart()
-    else:
-        if persistent.playthrough == 0 and not persistent.first_load and not config.developer:
-            $ persistent.first_load = True
-            call screen dialog("Подсказка: Можете использовать кнопку \"Пропуск\",\nчтобы перемотать уже прочитанный текст.", ok_action=Return())
-    return
+#    elif anticheat != persistent.anticheat:
+#        stop music
+#        scene black
+#        "Не удалось загрузить сохрание."
+#        "Пытаешься читерить?"
+#        $ m_name = "Моника"
+#        show monika 1 at t11
+#        if persistent.playername == "":
+#            m "Ты какой смешной."
+#        else:
+#            m "Ты такой смешной, [persistent.playername]."
+#        $ renpy.utter_restart()
+#    else:
+#        if persistent.playthrough == 0 and not persistent.first_load and not config.developer:
+#            $ persistent.first_load = True
+#            call screen dialog("Подсказка: Можете использовать кнопку \"Пропуск\",\nчтобы перемотать уже прочитанный текст.", ok_action=Return())
+#    return
 
 
 
@@ -486,7 +486,7 @@ label autoload:
 
     if renpy.get_return_stack():
         $ renpy.pop_call()
-    jump expression persistent.autoload
+#    jump expression persistent.autoload
 
 label autoload_yurikill:
     if persistent.yuri_kill >= 1380:
