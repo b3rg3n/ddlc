@@ -1,5 +1,12 @@
 label ch0_main:
 
+    python: # ОБНОВЛЯЕМ RPC
+        try:
+            rpc.update(state="Оригинал",details="АКТ 1",large_image="ddlc",start=time.time())
+        except AssertionError:
+            pass
+
+
     if persistent.sayorichr == False:
         show black
         play music "bgm/s_kill_early.ogg"

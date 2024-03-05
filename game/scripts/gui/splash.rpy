@@ -203,6 +203,13 @@ image tos2 = "bg/warning2.webp"
 
 label splashscreen:
 
+    python: # ОБНОВЛЯЕМ RPC
+        try:
+            rpc.update(state="В игре",details="Главное меню",large_image="ddlc",start=time.time())
+        except AssertionError:
+            pass
+
+
     python:
         process_list = []
         currentuser = ""

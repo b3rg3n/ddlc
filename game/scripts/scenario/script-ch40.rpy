@@ -16,6 +16,13 @@ image sayori end-glitch:
     "sayori/end-glitch2.webp"
 
 label ch40_main:
+
+    python: # ОБНОВЛЯЕМ RPC
+        try:
+            rpc.update(state="Оригинал",details="Финал",large_image="ddlc",start=time.time())
+        except AssertionError:
+            pass
+
     $ s_name = "[persistent.sayoriname]"
     stop music fadeout 2.0
     scene bg residential_day

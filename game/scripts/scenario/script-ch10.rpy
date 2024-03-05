@@ -1,4 +1,11 @@
 label ch10_main:
+
+    python: # ОБНОВЛЯЕМ RPC
+        try:
+            rpc.update(state="Оригинал",details="АКТ 2",large_image="ddlc",start=time.time())
+        except AssertionError:
+            pass
+
     $ delete_all_saves()
     $ persistent.deleted_saves = True
     $ gtext = glitchtext(48)

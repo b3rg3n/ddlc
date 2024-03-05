@@ -151,6 +151,13 @@ label ch30_noskip:
 image splash-glitch2 = "images/bg/splash-glitch2.webp"
 
 label ch30_main:
+
+    python: # ОБНОВЛЯЕМ RPC
+        try:
+            rpc.update(state="Оригинал",details="Только Моника",large_image="ddlc",start=time.time())
+        except AssertionError:
+            pass
+
     $ persistent.autoload = "ch30_main"
     $ config.allow_skipping = True
     $ persistent.monikatopics = []
