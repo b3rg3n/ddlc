@@ -1,21 +1,73 @@
 label ch0_main:
+
+    if persistent.sayorichr == False:
+        show black
+        play music "bgm/s_kill_early.ogg"
+        pause 1.0
+        show end with dissolve_cg
+        pause 3.0
+        scene white
+        show expression "images/cg/s_kill_early.webp":
+            yalign -0.05
+            xalign 0.25
+            dizzy(1.0, 4.0, subpixel=False)
+        show white as w2:
+            choice:
+                ease 0.25 alpha 0.1
+            choice:
+                ease 0.25 alpha 0.125
+            choice:
+                ease 0.25 alpha 0.15
+            choice:
+                ease 0.25 alpha 0.175
+            choice:
+                ease 0.25 alpha 0.2
+            choice:
+                ease 0.25 alpha 0.225
+            choice:
+                ease 0.25 alpha 0.25
+            choice:
+                ease 0.25 alpha 0.275
+            choice:
+                ease 0.25 alpha 0.3
+            pass
+            choice:
+                pass
+            choice:
+                0.25
+            choice:
+                0.5
+            choice:
+                0.75
+            repeat
+        show noise:
+            alpha 0.1
+        with Dissolve(1.0)
+        show expression Text("Теперь все будут счастливы.", style="sayori_text"):
+            xalign 0.8
+            yalign 0.5
+            alpha 0.0
+            30
+            linear 60 alpha 0.5
+        pause
+        $ renpy.quit()
+
     stop music fadeout 2.0
     scene bg residential_day
     with dissolve_scene_full
     play music t2
 
-    python:
-        if renpy.android :
-            import os
-            try:  
-                with open(os.environ['ANDROID_PUBLIC'] + "/characters/monika.chr", "rb") as f: 
-                    pass
-            except: renpy.jump("ch0_kill")
-        else :
-            try: renpy.file("../characters/monika.chr")
-            except: renpy.jump("ch0_kill")
+    if persistent.monikachr == False:
+        jump ch0_kill
+    elif persistent.yurichr == False:
+        jump ch0_kill
+    elif persistent.natsukichr == False:
+        jump ch0_kill
 
-    $ restore_all_characters()
+    $ persistent.monikachr = True
+    $ persistent.sayorichr = True
+    $ persistent.yurichr = True
+    $ persistent.natsukichr = True
     s "Э-э-э-э-э-э-эй!!"
     "Я увидел надоедливую девчонку, которая бежала ко мне, размахивая руками и совершенно не замечая, что привлекает к себе внимание окружающих."
     "Это [persistent.sayoriname], моя соседка и близкая подруга детства."
@@ -614,9 +666,9 @@ label ch0_kill:
     s "Прекрати это!"
     s "ПОЖАЛУЙСТА, ПРЕКРАТИ ЭТО!"
 
-    $ delete_character("sayori")
-    $ delete_character("natsuki")
-    $ delete_character("yuri")
-    $ delete_character("monika")
+    $ persistent.monikachr = False
+    $ persistent.sayorichr = False
+    $ persistent.yurichr = False
+    $ persistent.natsukichr = False
     $ renpy.quit()
     return

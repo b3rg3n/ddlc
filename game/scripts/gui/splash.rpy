@@ -1,19 +1,3 @@
-init -100 python:
-    if renpy.android:
-        import os
-        if not os.path.exists(os.environ['ANDROID_PUBLIC'] + "/characters/"):
-            try:
-                os.mkdir(os.environ['ANDROID_PUBLIC'] + "/characters/")
-            except:
-                pass
-    else :
-        import os
-        if not os.path.exists(config.basedir + "/characters/"):
-            try:
-                os.makedirs(config.basedir + "/characters/")
-            except OSError:
-                pass
-
 init python:
     menu_trans_time = 1
     splash_message_default = "Данная игра не предназначена для детей\nи впечатлительных особ."
@@ -236,109 +220,7 @@ label splashscreen:
                 pass
 
 
-    if not persistent.first_run:
-        python:
-            restore_all_characters()
-        $ quick_menu = False
-        scene white
-        pause 0.5
-        scene tos
-        with Dissolve(1.0)
-        pause 1.0
-        "Данная игра не предназначена для детей и впечатлительных особ."
-        "Личности, подверженные нервным расстройствам или находящиеся в состоянии депрессии, могут пострадать в процессе игры. Прочесть предостережения можно на сайте: http://ddlc.moe/warning.html"
-        menu:
-            "Для того, чтобы начать играть в Доки-Доки Литературный клуб, подтвердите, что достигли возраста тринадцати лет и осознаёте, что используете стрессовый контент."
-            "Подтверждаю.":
-                pass
-        $ persistent.first_run = True
-        scene tos2
-        with Dissolve(1.5)
-        pause 1.0
-        scene white
-
-
-    python:
-        s_kill_early = None
-        if persistent.playthrough == 0:
-            if renpy.android:
-                import os
-                try: 
-                    with open(os.environ['ANDROID_PUBLIC'] + "/characters/sayori.chr", "rb") as f: 
-                        pass
-                except: s_kill_early = True
-            else:
-                try: renpy.file("../characters/sayori.chr")
-                except: s_kill_early = True
-        if not s_kill_early:
-            if persistent.playthrough <= 2 and persistent.playthrough != 0:
-                if renpy.android:
-                    try:  
-                        with open(os.environ['ANDROID_PUBLIC'] + "/characters/monika.chr", "rb") as f: 
-                            pass
-                    except: open(os.environ['ANDROID_PUBLIC'] + "/characters/monika.chr", "wb").write(renpy.file("monika.chr").read())
-                else:
-                    try: renpy.file("../characters/monika.chr")
-                    except: open(config.basedir + "/characters/monika.chr", "wb").write(renpy.file("monika.chr").read())
-            if persistent.playthrough <= 1 or persistent.playthrough == 4:
-                if renpy.android:
-                    try:  
-                        with open(os.environ['ANDROID_PUBLIC'] + "/characters/natsuki.chr", "rb") as f: 
-                            pass
-                    except: open(os.environ['ANDROID_PUBLIC'] + "/characters/natsuki.chr", "wb").write(renpy.file("natsuki.chr").read())
-                    try:  
-                        with open(os.environ['ANDROID_PUBLIC'] + "/characters/yuri.chr", "rb") as f: 
-                            pass
-                    except: open(os.environ['ANDROID_PUBLIC'] + "/characters/yuri.chr", "wb").write(renpy.file("yuri.chr").read())
-                else:
-                    try: renpy.file("../characters/natsuki.chr")
-                    except: open(config.basedir + "/characters/natsuki.chr", "wb").write(renpy.file("natsuki.chr").read())
-                    try: renpy.file("../characters/yuri.chr")
-                    except: open(config.basedir + "/characters/yuri.chr", "wb").write(renpy.file("yuri.chr").read())
-            if persistent.playthrough == 4:
-                if renpy.android:
-                    try:  
-                        with open(os.environ['ANDROID_PUBLIC'] + "/characters/sayori.chr", "rb") as f: 
-                            pass
-                    except: open(os.environ['ANDROID_PUBLIC'] + "/characters/sayori.chr", "wb").write(renpy.file("sayori.chr").read())
-                else:
-                    try: renpy.file("../characters/sayori.chr")
-                    except: open(config.basedir + "/characters/sayori.chr", "wb").write(renpy.file("sayori.chr").read())
-
-    if not persistent.special_poems:
-        python hide:
-            persistent.special_poems = [0,0,0]
-            a = range(1,12)
-            for i in range(3):
-                b = renpy.random.choice(a)
-                persistent.special_poems[i] = b
-                a.remove(b)
-
-    $ basedir = config.basedir.replace('\\', '/')
-
-
-
-    if persistent.autoload:
-        jump autoload
-
-
-
-    $ config.allow_skipping = False
-
-    if persistent.playthrough == 2 and not persistent.seen_ghost_menu and renpy.random.randint(0, 63) == 0:
-        show black
-        $ config.main_menu_music = audio.ghostmenu
-        $ persistent.seen_ghost_menu = True
-        $ persistent.ghost_menu = True
-        $ renpy.music.play(config.main_menu_music)
-        pause 1.0
-        show end with dissolve_cg
-        pause 3.0
-        $ config.allow_skipping = True
-        return
-
-
-    if s_kill_early:
+    if persistent.s_kill_early:
         show black
         play music "bgm/s_kill_early.ogg"
         pause 1.0
@@ -390,6 +272,74 @@ label splashscreen:
         pause
         $ renpy.quit()
 
+    if not persistent.first_run:
+        $ persistent.monikachr = True
+        $ persistent.sayorichr = True
+        $ persistent.yurichr = True
+        $ persistent.natsukichr = True
+        $ quick_menu = False
+        scene white
+        pause 0.5
+        scene tos
+        with Dissolve(1.0)
+        pause 1.0
+        "Данная игра не предназначена для детей и впечатлительных особ."
+        "Личности, подверженные нервным расстройствам или находящиеся в состоянии депрессии, могут пострадать в процессе игры. Прочесть предостережения можно на сайте: http://ddlc.moe/warning.html"
+        menu:
+            "Для того, чтобы начать играть в Доки-Доки Литературный клуб, подтвердите, что достигли возраста тринадцати лет и осознаёте, что используете стрессовый контент."
+            "Подтверждаю.":
+                pass
+        $ persistent.first_run = True
+        scene tos2
+        with Dissolve(1.5)
+        pause 1.0
+        scene white
+
+
+        if persistent.playthrough == 0:
+            if persistent.sayorichr == False:
+                $ persistent.s_kill_early = True
+
+        if not persistent.s_kill_early:
+            if persistent.playthrough <= 2 and persistent.playthrough != 0:
+                $ persistent.monikachr = True
+            if persistent.playthrough <= 1 or persistent.playthrough == 4:
+                $ persistent.yurichr = True
+                $ persistent.natsukichr = True
+            if persistent.playthrough == 4:
+                $ persistent.sayorichr = True
+
+    if not persistent.special_poems:
+        python hide:
+            persistent.special_poems = [0,0,0]
+            a = range(1,12)
+            for i in range(3):
+                b = renpy.random.choice(a)
+                persistent.special_poems[i] = b
+                a.remove(b)
+
+    $ basedir = config.basedir.replace('\\', '/')
+
+
+
+    if persistent.autoload:
+        jump autoload
+
+
+
+    $ config.allow_skipping = False
+
+    if persistent.playthrough == 2 and not persistent.seen_ghost_menu and renpy.random.randint(0, 63) == 0:
+        show black
+        $ config.main_menu_music = audio.ghostmenu
+        $ persistent.seen_ghost_menu = True
+        $ persistent.ghost_menu = True
+        $ renpy.music.play(config.main_menu_music)
+        pause 1.0
+        show end with dissolve_cg
+        pause 3.0
+        $ config.allow_skipping = True
+        return
 
     show white
     $ persistent.ghost_menu = False
@@ -414,7 +364,10 @@ label warningscreen:
 
 label after_load:
     if persistent.playthrough == 0:
-        $ restore_all_characters()
+        $ persistent.monikachr = True
+        $ persistent.sayorichr = True
+        $ persistent.yurichr = True
+        $ persistent.natsukichr = True
     $ config.allow_skipping = allow_skipping
     $ _dismiss_pause = config.developer
     $ persistent.ghost_menu = False
@@ -456,10 +409,10 @@ label after_load:
 #            m "Ты такой смешной, [persistent.playername]."
 #        $ renpy.utter_restart()
 #    else:
-#        if persistent.playthrough == 0 and not persistent.first_load and not config.developer:
-#            $ persistent.first_load = True
-#            call screen dialog("Подсказка: Можете использовать кнопку \"Пропуск\",\nчтобы перемотать уже прочитанный текст.", ok_action=Return())
-#    return
+        if persistent.playthrough == 0 and not persistent.first_load and not config.developer:
+            $ persistent.first_load = True
+            call screen dialog("Подсказка: Можете использовать кнопку \"Пропуск\",\nчтобы перемотать уже прочитанный текст.", ok_action=Return())
+    return
 
 
 

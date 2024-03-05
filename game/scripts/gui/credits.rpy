@@ -381,8 +381,8 @@ label credits:
     $ config.keymap['hide_windows'] = []
     $ renpy.display.behavior.clear_keymap_cache()
     $ quick_menu = False
-    $ config.skipping = False
-    $ config.allow_skipping = False
+    $ config.skipping = True
+    $ config.allow_skipping = True
     scene black
     play music "bgm/end-voice.ogg" noloop
 
@@ -635,8 +635,12 @@ label credits2:
         call screen dialog(message="Переустановить?", ok_action=Return())
         call screen dialog(message="Ладно, щас всё сделаю...", ok_action=Return())
         $ delete_all_saves()
-        $ restore_all_characters()
-        $ s_kill_early = None
+        $ persistent.tried_skip = False
+        $ persistent.monikachr = True
+        $ persistent.sayorichr = True
+        $ persistent.yurichr = True
+        $ persistent.natsukichr = True
+        $ persistent.s_kill_early = False
         $ persistent.autoload = False
         $ persistent.first_run = False
         $ persistent.playthrough = 0

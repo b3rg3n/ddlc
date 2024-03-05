@@ -15,36 +15,6 @@ init python:
     def delete_all_saves():
         for savegame in renpy.list_saved_games(fast=True):
             renpy.unlink_save(savegame)
-    def delete_character(name):
-        import os
-        if renpy.android :
-            try: os.remove(os.environ['ANDROID_PUBLIC'] + "/characters/" + name + ".chr")
-            except: pass
-        else :
-            try: os.remove(config.basedir + "/characters/" + name + ".chr")
-            except: pass
-    def restore_character(names):
-        import os
-        if not isinstance(names, list):
-            raise Exception("'names' parameter must be a list. Example: [\"monika\", \"sayori\"].")
-
-        for x in names:
-            if renpy.android:
-                try: renpy.file(os.environ['ANDROID_PUBLIC'] + "/characters/" + x + ".chr")
-                except: open(os.environ['ANDROID_PUBLIC'] + "/characters/" + x + ".chr", "wb").write(renpy.file("restore/" + x + ".chr").read())
-            else:
-                try: renpy.file(config.basedir + "/characters/" + x + ".chr")
-                except: open(config.basedir + "/characters/" + x + ".chr", "wb").write(renpy.file("restore/" + x + ".chr").read())
-
-    def restore_all_characters():
-        if persistent.playthrough == 0:
-            restore_character(["monika", "sayori", "natsuki", "yuri"])
-        elif persistent.playthrough == 1 or persistent.playthrough == 2:
-            restore_character(["monika", "natsuki", "yuri"])
-        elif persistent.playthrough == 3:
-            restore_character(["monika"])
-        else:
-            restore_character(["sayori", "natsuki", "yuri"])
     def pause(time=None):
         if not time:
             renpy.ui.saybehavior(afm=" ")
@@ -52,9 +22,6 @@ init python:
             return
         if time <= 0: return
         renpy.pause(time, hard = True)
-
-
-
 
 
 define audio.t1 = "<loop 22.073>bgm/1.ogg"
@@ -1302,6 +1269,11 @@ define _dismiss_pause = config.developer
 default persistent.playername = ""
 default player = persistent.playername
 default persistent.playthrough = 0
+default persistent.s_kill_early = False
+default persistent.yurichr = True
+default persistent.monikachr = True
+default persistent.sayorichr = True
+default persistent.natsukichr = True
 default persistent.yuri_kill = 0
 default persistent.seen_eyes = None
 default persistent.seen_sticker = None
@@ -1387,12 +1359,24 @@ label menuchr:
     scene tos
     menu:
         "Удалить monika.chr":
-            $ delete_character("monika")
+            $ persistent.monikachr = False
         "Удалить sayori.chr":
-            $ delete_character("sayori")
+            $ persistent.sayorichr = False
         "Удалить yuri.chr":
-            $ delete_character("yuri")
+            $ persistent.yurichr = False
         "Удалить natsuki.chr":
-            $ delete_character("natsuki")
+            $ persistent.natsukichr = False
+        "Восстановить всё":
+            $ delete_all_saves()
+            $ persistent.tried_skip = False
+            $ persistent.monikachr = True
+            $ persistent.sayorichr = True
+            $ persistent.yurichr = True
+            $ persistent.natsukichr = True
+            $ persistent.s_kill_early = False
+            $ persistent.autoload = False
+            $ persistent.first_run = False
+            $ persistent.playthrough = 0
+            $ renpy.full_restart(transition=None, label="splashscreen")
         "Вернуться":
             return

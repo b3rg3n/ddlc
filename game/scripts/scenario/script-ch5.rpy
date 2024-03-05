@@ -218,7 +218,7 @@ label ch5_main:
     mc "{cps=30}Саё...........{/cps}{nw}"
     $ persistent.playthrough = 1
     $ persistent.anticheat = renpy.random.randint(100000, 999999)
-    $ delete_character("sayori")
+    $ persistent.sayorichr = False
     $ in_sayori_kill = True
     window hide(None)
     window auto

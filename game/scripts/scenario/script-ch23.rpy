@@ -706,10 +706,10 @@ label yuri_kill_3:
     m "Секундочку..."
     $ consolehistory = []
     call updateconsole ("os.remove(\"characters/yuri.chr\")", "yuri.chr успешно удалён.") from _call_updateconsole_18
-    $ delete_character("yuri")
+    $ persistent.yurichr = False
     pause 1.0
     call updateconsole ("os.remove(\"characters/natsuki.chr\")", "natsuki.chr успешно удалён.") from _call_updateconsole_19
-    $ delete_character("natsuki")
+    $ persistent.natsukichr = False
     pause 1.0
     m 2a "Почти закончила."
     m 2j "Только кексом перекушу по-быстрому!"

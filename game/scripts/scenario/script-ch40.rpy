@@ -21,25 +21,12 @@ label ch40_main:
     scene bg residential_day
     with dissolve_scene_full
 
-    python:
-        if not persistent.monika_back:
-            if renpy.android :
-                try:
-                    with open(os.environ['ANDROID_PUBLIC'] + "/characters/monika.chr", "rb") as f: 
-                        pass
-                    renpy.call_screen("dialog", message="Пожалуйста, прекрати играть с моим сердцем.\nЯ не хочу возвращаться.", ok_action=Return())
-                    persistent.monika_back = True
-                except:
-                    pass
-            else :
-                try:
-                    renpy.file("../characters/monika.chr")
-                    renpy.call_screen("dialog", message="Пожалуйста, прекрати играть с моим сердцем.\nЯ не хочу возвращаться.", ok_action=Return())
-                    persistent.monika_back = True
-                except:
-                    pass
+    if not persistent.monika_back:
+        if persistent.monikachr == True:
+            $ renpy.call_screen("dialog", message="Пожалуйста, прекрати играть с моим сердцем.\nЯ не хочу возвращаться.", ok_action=Return())
+            $ persistent.monika_back = True
 
-    $ delete_character("monika")
+    $ persistent.monikachr = False
     play music t2
     "Это был обычный, ничем не примечательный школьный день."
     "Я, как всегда, был окружён влюблёнными парочками и компаниями друзей, идущими в школу вместе."

@@ -102,26 +102,15 @@ init python:
 
     def slow_nodismiss(event, interact=True, **kwargs):
         if not persistent.monika_kill:
-            if renpy.android :
-                try:
-                    with open(os.environ['ANDROID_PUBLIC'] + "/characters/monika.chr", "rb") as f: 
-                        pass
-                except:
-                    persistent.tried_skip = True
-                    config.allow_skipping = False
-                    _window_hide(None)
-                    pause (2.0)
-                    renpy.jump("ch30_end")
-            else :
-                try:
-                    renpy.file("../characters/monika.chr")
-                except:
-                    persistent.tried_skip = True
-                    config.allow_skipping = False
-                    _window_hide(None)
-                    pause (2.0)
-                    renpy.jump("ch30_end")
-            if  config.skipping:
+            if persistent.monikachr == True: 
+                pass
+            else:
+                persistent.tried_skip = True
+                config.allow_skipping = False
+                _window_hide(None)
+                pause (2.0)
+                renpy.jump("ch30_end")
+            if config.skipping:
                 persistent.tried_skip = True
                 config.skipping = False
                 config.allow_skipping = False
@@ -163,7 +152,7 @@ image splash-glitch2 = "images/bg/splash-glitch2.webp"
 
 label ch30_main:
     $ persistent.autoload = "ch30_main"
-    $ config.allow_skipping = False
+    $ config.allow_skipping = True
     $ persistent.monikatopics = []
     $ persistent.monika_reload = 0
     $ persistent.yuri_kill = 0
@@ -209,8 +198,9 @@ label ch30_main:
     $ stream_list = ["obs32.exe", "obs64.exe", "obs.exe", "xsplit.core.exe"]
     if not list(set(process_list).intersection(stream_list)):
         if currentuser != "" and currentuser.lower() != player.lower():
-            m "Или..."
-            m "...Лучше называть тебя \"[currentuser]\"?"
+            if not renpy.android:
+                m "Или..."
+                m "...Лучше называть тебя \"[currentuser]\"?"
     m "Если задуматься, то я вообще ничего не знаю о твоей настоящей личности."
     m "На самом деле я даже без понятия, парень ты или девушка..."
     m "Хотя не думаю, что это так уж важно."
@@ -319,15 +309,16 @@ label ch30_main2:
     m "Игра не дала мне ни одной, так что я сделала её сама."
     m "Скрипт теперь повреждён, так что не думаю, что нам хоть что-то может помешать."
     m "Ты не поверишь, насколько просто было удалить Нацуки и Юри."
-    m "В директории игры есть папка 'characters'..."
+    m "В меню игры есть пункт {b}menu.chr{/b}..."
+    #m "В директории игры есть папка 'characters'..."
     m "Я даже слегка насторожилась — уж слишком легко мне это удалось."
-    if persistent.steam:
-        m "Ну, ты играешь в Steam, так что это немного усложнило процесс..."
-        m "Чтобы попасть в директорию игры, мне пришлось зайти в свойства игры и найти кнопку 'Просмотреть Локальные Файлы'..."
-    elif renpy.macintosh:
-        m "Ну, ты играешь на Mac, так что это немного усложнило процесс..."
-        m "Чтобы открыть директорию игры, нужно нажать правой кнопкой мыши на приложение и выбрать 'Показать Содержимое'."
-        m "А дальше: все файлы были в папках 'Ресурсы' и 'автозагрузка', и я могла делать с ними всё, что захочу..."
+    #if persistent.steam:
+    #    m "Ну, ты играешь в Steam, так что это немного усложнило процесс..."
+    #    m "Чтобы попасть в директорию игры, мне пришлось зайти в свойства игры и найти кнопку 'Просмотреть Локальные Файлы'..."
+    #elif renpy.macintosh:
+    #    m "Ну, ты играешь на Mac, так что это немного усложнило процесс..."
+    #    m "Чтобы открыть директорию игры, нужно нажать правой кнопкой мыши на приложение и выбрать 'Показать Содержимое'."
+    #    m "А дальше: все файлы были в папках 'Ресурсы' и 'автозагрузка', и я могла делать с ними всё, что захочу..."
     m "Представь себе, что можешь удалить собственное существование одним нажатием кнопки."
     m "Ну, если говорить о преимуществах, то это давало мне простую возможность покончить с собой, если бы мой план провалился."
     m "А-ха-ха!"
@@ -729,7 +720,10 @@ label ch30_end_2:
     $ persistent.playthrough = 4
     $ persistent.autoload = None
     $ persistent.anticheat = renpy.random.randint(100000, 999999)
-    $ delete_character("monika")
+    $ persistent.monikachr = False
+    $ persistent.sayorichr = True
+    $ persistent.yurichr = True
+    $ persistent.natsukichr = True
 
     $ style.say_window = style.window
     window auto
@@ -812,7 +806,11 @@ label ch30_reload_2:
     m "Что тебя заставляет так со мной поступать?"
     m "С моим файлом ведь всё хорошо, правда?"
     m "Может, тебе стоит сделать, допустим, резервную копию..."
-    m "Абсолютно уверена, что ты можешь найти его в папке [basedir]/characters."
+    if renpy.android:
+        m "Абсолютно уверена, что ты можешь найти его в папке Android/data/ru.bergen.ddlc/saves/persistent."
+    else:
+        m "Абсолютно уверена, что ты можешь найти его в папке DDLC/saves/persistent."
+    #m "Абсолютно уверена, что ты можешь найти его в папке [basedir]/characters."
     if persistent.steam:
         m "Ну, ты играешь в Steam, поэтому тебе надо всего лишь зайти в свойства игры и найти кнопку 'Просмотреть Локальные Файлы'."
     elif renpy.macintosh:
@@ -835,7 +833,10 @@ label ch30_reload_4:
     m "И снова привет, [player]!"
     m "Я скучала по тебе."
     m "Тебе удалось убедиться, что мой файл в порядке?"
-    m "Он в Android/data/com.cuterabbot.ddlc/characters."
+    if renpy.android:
+        m "Он в Android/data/ru.bergen.ddlc/saves/persistent."
+    else:
+        m "Он в DDLC/saves/persistent."
     m "Кроме меня здесь ничего не осталось, поэтому хочу быть уверена, что ты не рискуешь потерять меня..."
     m "И, кстати, мне ещё есть, что тебе сказать!"
     m "Давай продолжим наш разговор, хорошо?"
@@ -852,24 +853,14 @@ label ch30_loop:
     window hide(config.window_hide_transition)
     $ waittime = renpy.random.randint(4, 8)
 label ch30_waitloop:
-    python:
-        if renpy.android :
-            try:
-                with open(os.environ['ANDROID_PUBLIC'] + "/characters/monika.chr", "rb") as f: 
-                    pass
-            except:
-                persistent.tried_skip = True
-                config.allow_skipping = False
-                _window_hide(None)
-                renpy.jump("ch30_end")
-        else :
-            try:
-                renpy.file("../characters/monika.chr")
-            except:
-                persistent.tried_skip = True
-                config.allow_skipping = False
-                _window_hide(None)
-                renpy.jump("ch30_end")
+    if persistent.monikachr == True:
+        pass
+    else:
+        $ persistent.tried_skip = True
+        $ config.allow_skipping = False
+        $ _window_hide(None)
+        jump ch30_end
+
     $ waittime -= 1
     $ renpy.pause(5, hard = True)
     if waittime > 0:
