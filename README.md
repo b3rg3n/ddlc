@@ -1,3 +1,4 @@
+![poster](https://github.com/b3rg3n/ddlc/assets/124900745/45e30e83-3328-4d41-bac1-562ce0bb1707)
 # DDLC Modloader Edition
 
 Данная сборка направлена на улучшение совместимости и работоспособности игры Doki Doki Literature Club.
